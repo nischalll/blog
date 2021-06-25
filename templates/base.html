@@ -17,18 +17,34 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-dark bg-primary">
-            <div class="container-fluid h1">
+        <nav class="navbar navbar-dark bg-Success container-fluid">
+            <div class="container-fluid h5">
                 <a class="navbar-brand" href="{% url 'home' %}">blogpot :)</a>
-            
-             <a class="navbar-brand" href="{% url 'post_new' %}">+ New Blog Post</a>
+                {% if user.is_authenticated %}
+
+                <a class="navbar-text" href="{% url 'post_new' %}">+ New Post</a>
+                <a class="btn btn-outline-warning btn-sm" href="{% url 'logout' %}" role="button">Log out</a>
+                {% else %}
+                
+                <div>
+                You are not logged in
+                <a class="btn btn-outline-warning btn-sm" href="{% url 'signup' %}" role="button">Sign Up</a>
+                <a class="btn btn-outline-warning btn-sm" href="{% url 'login' %}" role="button">Log In</a>
+                </div>
+                {% endif %}
             </div>
         </nav>
+
     </header>
     <div class="container-fluid ">
         {% block content %}
         {% endblock content %}
     </div>
+    <nav class="navbar fixed-bottom navbar-dark bg-Success">
+        <div class="container">
+            <a class="navbar-brand " href="{% url 'home' %}">blogpot.com</a>
+        </div>
+    </nav>
 </body>
 
 </html>
